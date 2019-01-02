@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kaituo.huntuo.dao.LableGroupDao" >
+
+	<!--创建-->
+	<insert id="insertlablegroup" parameterType="com.kaituo.huntuo.domain.po.LableGroupPO" useGeneratedKeys="true" keyProperty="id">
+		insert into t_lable_group (group_name,cate_id,sort_no)
+  		values (#{groupName},#{cateId},#{sortNo} )
+	</insert>
+
+
+	<!--删除-->
+	<delete id="deleteByKeylablegroup" parameterType="java.lang.Integer">
+		delete from t_lable_group
+		where lable_group_id=#{Id,jdbcType=INTEGER}
+	</delete>
+    <!--通过cateid查询-->
+	<select id="selectBycateId" parameterType="java.lang.Integer" resultType="com.kaituo.huntuo.domain.po.LableGroupPO">
+	    select
+	    	lable_group_id AS id,group_name
+	    from
+	    	t_lable_group
+	    where
+	    	cate_id = #{cateId,jdbcType=INTEGER}
+	    order by
+	        sort_no
+	      desc
+	</select>
+</mapper>
